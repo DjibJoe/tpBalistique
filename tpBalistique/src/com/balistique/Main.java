@@ -1,7 +1,9 @@
 package com.balistique;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeSet;
@@ -29,8 +31,9 @@ public class Main {
 		}
 		
 		for(int i = 0 ; i < listeSequences.size() ; i++) 
-			System.out.println( Arrays.toString(listeSequences.get(i).genes));
+			System.out.println(listeSequences.get(i).getUtilite());
 		
+		scorer();
 		System.out.println("----------------------------");
 		
 		for(int i = 0 ; i < listeSequences.size() ; i++) 
@@ -40,11 +43,42 @@ public class Main {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	void croiserMeilleurs()
+	{
+		if(listeSequences.size()>=2)
+		{
+			for(int i=0; i<listeSequences.size(); i++)
+			{
+				for(int j=0; j<listeSequences.size(); j++)					
+				{
+					if(i==j) continue;
+					Sequence enfant = listeSequences.get(i).croiserSequence(listeSequences.get(j));
+					listeSequences.add(enfant);
+				}
+			}			
+		}
+	}
+	
 	static void scorer()
 	{
-		final TreeSet<Sequence> ensemble = new TreeSet<>();
-		listeSequences.forEach(s->ensemble.add(s));
-		listeSequences.clear();
-		listeSequences.addAll(ensemble);
+		/**ordonne la liste des sequence selon l'utilité*/
+		listeSequences.sort(Comparator.comparing(Sequence::getUtilite));
+		
 	}	
 }

@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @author Djohar
+ * @author Djohar med
  *
  */
-public class Sequence implements Comparable<Sequence> {
+public class Sequence {
 	/** sequence = tableau d'entiers */
 	double[] genes;
 	/** longueur d'une sequence */
@@ -15,7 +15,7 @@ public class Sequence implements Comparable<Sequence> {
 	/** score */
 	final double tauxGenesMutants = 0.1;
 	/** nb de genes devant muter */
-	int nbGenesAMuter = (int) (longueurSequence * tauxGenesMutants);
+	int nbGenesAMuter = (int) Math.round(longueurSequence * tauxGenesMutants);
 	/** hasard */
 	static Random hasard = new Random();
 	private double utilite;
@@ -42,16 +42,7 @@ public class Sequence implements Comparable<Sequence> {
 		utilite = result;
 		return utilite;
 	}
-	@Override
-	public int compareTo(Sequence arg0) {
-		int retour = 0;
-		double precision = 100000000;
-		
-			retour = (int)Math.round(precision*(arg0.utilite-utilite));
-		
-			
-		return retour;
-	}
+	
 	
 	
 	public double CalculeHauteur(int x) {
@@ -62,6 +53,27 @@ public class Sequence implements Comparable<Sequence> {
 						
 		return result;
 	}
+	
+	
+	public Sequence croiserSequence(Sequence autre)
+	{
+		for (int i = 0; i < longueurSequence; i++) {
+			
+		}
+		Sequence result = new Sequence();
+		int demiLongSequence = longueurSequence/2;
+		System.arraycopy(genes, 0, result.genes, 0, demiLongSequence);
+		System.arraycopy(autre.genes, demiLongSequence, result.genes, demiLongSequence, demiLongSequence);
+		result.calculUtilite();
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public String toString() {
